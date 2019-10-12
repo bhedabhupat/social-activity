@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+
+{% block title %}
+  KYC Manager
+{% endblock title %}
+
+{% block style %}
+<style>
+  .user-card{
+    background : #fff;
+    box-shadow :0.5px 0.5px 1px 1px #cccccc;
+    border-radius : 4px;
+  }
+
+  .user-card p {
+    font-size: 1.2rem;
+    color: #48465b;
+    font-weight: 500;
+    margin:0px;
+    padding: 0px;
+  }
+
+  .user-card span{
+    display: block;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding-top: .4rem;
+    color: #74788d;
+    width: 100%;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    display:inline-block;
+
+  }
+
+  .card-body{
+    background: linear-gradient(to right, rgb(255, 255, 255), rgb(240, 241, 242), rgb(240, 241, 242), rgb(255, 255, 255));
+  }
+
+  select{
+    text-transform: capitalize;
+  }
+
+
+  .kt-widget.kt-widget--user-profile-1{
+    padding-bottom: 1.7rem;
+    margin-top:50px;
+  }
+
+  .kt-widget.kt-widget--user-profile-1 .kt-widget__head{
+    display: flex;
+    align-items: flex-start;
+  
+}
+
+.kt-widget__body, .kt-widget__head{
+  padding:20px;
+  background: linear-gradient(to right, rgb(255, 255, 255), rgb(240, 241, 242), rgb(240, 241, 242), rgb(255, 255, 255));
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__head .kt-widget__media img{
+    width: 150px;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__head .kt-widget__content{
+  padding-left:1.6rem;
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__head .kt-widget__content .kt-widget__section .kt-widget__username{
+
+  font-size: 1.5rem;
+  font-weight: bold;
+    color: #48465b;
+    font-weight: 500;
+
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__head .kt-widget__content .kt-widget__section .kt-widget__username i{
+
+  font-size: 1.3rem;
+    padding-left: .4rem;
+
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__head .kt-widget__content .kt-widget__section .kt-widget__subtitle{
+  font-size: 1.1rem;
+    display: -webkit-inline-box;
+    padding: .25rem 0 0 0;
+    font-weight: 500;
+    color: #74788d;
+
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__head .kt-widget__content .kt-widget__action{
+  margin-top: 1rem;
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__head .kt-widget__content .kt-widget__action .btn{
+
+  margin-right: .4rem;
+    font-weight: 600;
+    padding: .3rem 1rem;
+
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__content{
+
+  padding: 1.9rem 0 2.1rem 0;
+
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__content .kt-widget__info{
+
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: .5rem;
+
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__content .kt-widget__info .kt-widget__label{
+
+  color: #48465b;
+    font-weight: 500;
+
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__content .kt-widget__info .kt-widget__data{
+
+  color: #74788d;
+    font-weight: 400;
+
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__items .kt-widget__item{
+
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .9rem 1.05rem .9rem .6rem;
+    margin: .4rem 0;
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__items .kt-widget__item .kt-widget__section .kt-widget__icon svg{
+
+  width: 2rem;
+    height: 1.5rem;
+}
+
+.kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__items .kt-widget__item .kt-widget__section .kt-widget__desc{
+
+  color: #74788d;
+    font-weight: 500;
+    padding-left: .3rem;
+
+}
+
+.img-fluid{
+  min-height: 250px;
+  max-height: 250px;
+}
+
+.doc-img-title{
+  text-align: center;
+  background: #dfdfdf;
+  padding: 5px;
+  text-decoration: none;
+  color: #000;
+}
+
+
+</style>
+{% endblock style%}
+
+{% block content %}
+
+
+<div class="row">
+  <div class="col-md-4">
+      
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-6 float-left">
+      <div class="kt-widget kt-widget--user-profile-1">
+        <div class="kt-widget__head">
+            <div class="kt-widget__media">
+                <img src="{{ media }}{{ kyc_info.selfie }}" alt="image">
+            </div>
+            <div class="kt-widget__content">
+                <div class="kt-widget__section">
+                    <a href="#" class="kt-widget__username">
+                        {{kyc_info.user.first_name}} {{kyc_info.user.last_name}}
+                        <i class="flaticon2-correct kt-font-success"></i>                       
+                    </a>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="kt-widget__body">
+            <div class="kt-widget__content">
+                <div class="kt-widget__info">
+                  <span class="kt-widget__label">Username:</span>
+                  <a href="#" class="kt-widget__data">{{ kyc_info.user.username }}</a>
+              </div>
+                <div class="kt-widget__info">
+                    <span class="kt-widget__label">Email:</span>
+                    <a href="#" class="kt-widget__data">{{ kyc_info.user.email }}</a>
+                </div>
+                <div class="kt-widget__info">
+                    <span class="kt-widget__label">Phone:</span>
+                    <a href="#" class="kt-widget__data">{{kyc_info.user.phone}}</a>
+                </div>
+                <div class="kt-widget__info">
+                    <span class="kt-widget__label">Document Type:</span>
+                    <span class="kt-widget__data" style="text-transform: capitalize">{{ kyc_info.doc_type }}</span>
+                </div>
+                <div class="kt-widget__info">
+                    <span class="kt-widget__label">Location:</span>
+                    <span class="kt-widget__data">{{ kyc_info.user.country }}</span>
+                </div>
+                <div class="kt-widget__info">
+                  <span class="kt-widget__label">Birth:</span>
+                  <span class="kt-widget__data">{{ kyc_info.datefield }}</span>
+              </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-6 float-left">
+      <form method="post" class="my-5">
+        {% csrf_token %}
+        <div class="form-group row">
+          <label for="{{ form.status.id_for_label }}" class="col-sm-2 col-form-label">
+            {{ form.status.label_tag }}
+          </label>
+          <div class="col-sm-10">
+            {{ form.status }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.reason.id_for_label }}" class="col-sm-2 col-form-label">
+            {{ form.reason.label_tag }}
+          </label>
+          <div class="col-sm-10">
+            {{ form.reason }}
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="{{ form.doc_type.id_for_label }}" class="col-sm-2 col-form-label">
+              Type:
+            </label>
+            <div class="col-sm-10">
+              {{ form.doc_type }}
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-sm-2"></div>
+          <button type="submit" name="Save" class="btn btn-primary btn-bg-blue col-md-3 col-md-offset-3">Update</button>
+          <a href="{% url 'kyc_checks:home' %}" class='btn btn-danger btn-bg col-md-3'>Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <a href="{{ media }}{{ kyc_info.doc_photo }}"  data-lightbox="roadtrip" data-title="Document Photo" class="col-sm-4">
+      <img src="{{ media }}{{ kyc_info.doc_photo }}" class="img-fluid">
+      <p class="doc-img-title">Document Photo</p>
+  </a>
+  {% if kyc_info.doc_photo_back %}
+  <a href="{{ media }}{{ kyc_info.doc_photo_back }}"  data-lightbox="roadtrip" data-title="Document Photo Back" class="col-sm-4">
+      <img src="{{ media }}{{ kyc_info.doc_photo_back }}" class="img-fluid">
+      <p class="doc-img-title">Document Back Photo</p>
+  </a>
+  {% endif %}
+  <a href="{{ media }}{{ kyc_info.selfie }}"  data-lightbox="roadtrip" data-title="Selfie" class="col-sm-4">
+      <img src="{{ media }}{{ kyc_info.selfie }}" class="img-fluid">
+      <p class="doc-img-title">Selfie</p>
+  </a>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-12">
+    <div id="carouselExampleControls" class="carousel slide my-5" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="{{ media }}{{ kyc_info.doc_photo }}" alt="First slide">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Document front</h5>
+          </div>
+        </div>
+        {% if kyc_info.doc_photo_back %}
+          <div class="carousel-item">
+            <img class="d-block w-100" src="{{ media }}{{ kyc_info.doc_photo_back }}" alt="Second slide">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Document back</h5>
+            </div>
+          </div>
+        {% endif %}
+        <div class="carousel-item">
+          <img class="d-block w-100" src="{{ media }}{{ kyc_info.selfie }}" alt="Third slide">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>User selfie</h5>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+
+{% endblock content %}
+
+{% block js%}
+
+{% endblock js%}

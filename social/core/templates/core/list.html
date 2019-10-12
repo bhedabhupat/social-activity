@@ -1,0 +1,77 @@
+<table class="table m-top-20">
+    <thead>
+        <tr>
+        <th scope="col">Sr. No.</th>
+        <th scope="col">
+          <a> Name 
+            <i class="arrow-up sorting fa fa-caret-up" style="color:white; cursor: pointer; float: right;" data-value = 'user__username' data-type = 'ASC'></i>
+            <i class="arrow-down sorting fa fa-sort-down" style="color:white; cursor: pointer; float: right;margin-top: 5%;   margin-right: -0.60rem;" data-value = '-user__username' data-type = 'DESC'></i>
+          </a>
+        </th>
+        <th scope="col">
+          <a>Email
+              <i class="arrow-up sorting fa fa-caret-up" style="color:white; cursor: pointer; float: right;" data-value = 'user__email' data-type = 'ASC'></i>
+              <i class="arrow-down sorting fa fa-sort-down" style="color:white; cursor: pointer; float: right;margin-top: 1.5%;   margin-right: -0.60rem;" data-value = '-user__email' data-type = 'DESC'></i>
+          </a>
+        </th>
+        <th scope="col">
+          <a>Type
+              <i class="arrow-up sorting fa fa-caret-up" style="color:white; cursor: pointer; float: right;" data-value = 'user__country' data-type = 'ASC'></i>
+              <i class="arrow-down sorting fa fa-sort-down" style="color:white; cursor: pointer; float: right;margin-top: 4%;   margin-right: -0.60rem;" data-value = '-user__country' data-type = 'DESC'></i>
+          </a>
+        </th>
+        <th scope="col">
+          <a>Status
+              <i class="arrow-up sorting fa fa-caret-up" style="color:white; cursor: pointer; float: right;" data-value = 'status' data-type = 'ASC'></i>
+              <i class="arrow-down sorting fa fa-sort-down" style="color:white; cursor: pointer; float: right;margin-top: 4.5%;   margin-right: -0.60rem;" data-value = '-status' data-type = 'DESC'></i>
+          </a>
+        </th>
+        <th scope="col">View</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if kyc_infos %}
+        {% for kyc_info in kyc_infos %}
+        <tr>
+            <th scope="row">{{ kyc_info.user.pk }}</th>
+            <td><a style="color: black" href="{% url 'kyc_checks:kyc_edit' kyc_info.pk %}">{{ kyc_info.user.username }}</a></td>
+            <td><a style="color: black" href="{% url 'kyc_checks:kyc_edit' kyc_info.pk %}">{{ kyc_info.user.email }}</a></td>
+            <td><a style="color: black" href="{% url 'kyc_checks:kyc_edit' kyc_info.pk %}">{{ kyc_info.doc_type}}</a></td>
+            <td><a style="color: black" href="{% url 'kyc_checks:kyc_edit' kyc_info.pk %}">{{ kyc_info.get_status_display|lower|capfirst }}</a></td>
+            <td><a href="{% url 'kyc_checks:kyc_edit' kyc_info.pk %}"><i class="fa fa-eye"></i></a></td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+           <td class="text-center" colspan="6"> No records found</td> 
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+<nav aria-label="Page navigation example">
+        <ul class="pagination">
+          {% if kyc_infos.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page=1" aria-label="First">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          {% endif %}
+          {% for page in kyc_infos.paginator.page_range %}
+          <li class="page-item">
+            {% if page == kyc_infos.number %}
+              <a class="page-link highlight" href="?page={{ page }}">{{ page }}</a>
+            {% else %}
+              <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+          {% if kyc_infos.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ kyc_infos.paginator.num_pages }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
